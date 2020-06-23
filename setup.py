@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 from distutils.core import setup, Extension
 
 setup(

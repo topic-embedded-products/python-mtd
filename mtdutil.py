@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 # Methods to interact with MTD, Memory Technology Device
 import struct
 import mtd

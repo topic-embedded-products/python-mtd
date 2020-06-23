@@ -1,4 +1,7 @@
-/* MTD functions for Python, based on:
+/*
+ * SPDX-License-Identifier: MIT
+ *
+ * MTD functions for Python, based on:
  *  http://www.opensourceforu.com/2012/01/working-with-mtd-devices/
  * Copyright (C) 2017 Topic Embedded Products
  */
@@ -6,7 +9,6 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <mtd/mtd-user.h>
-
 
 static PyObject* erase_sector(PyObject *self, PyObject *args)
 {
