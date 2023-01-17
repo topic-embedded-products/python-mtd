@@ -5,6 +5,7 @@
  *  http://www.opensourceforu.com/2012/01/working-with-mtd-devices/
  * Copyright (C) 2017 Topic Embedded Products
  */
+#define PY_SSIZE_T_CLEAN
 #include <Python.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
@@ -57,7 +58,16 @@ static PyMethodDef mtd_methods[] = {
     {NULL, NULL, 0, NULL}
 };
 
-PyMODINIT_FUNC initmtd(void)
+static struct PyModuleDef mtdmodule = {
+    PyModuleDef_HEAD_INIT,
+    "mtd",    /* name of module */
+    NULL,     /* module documentation, may be NULL */
+    -1,       /* size of per-interpreter state of the module,
+                 or -1 if the module keeps state in global variables. */
+    mtd_methods
+};
+
+PyMODINIT_FUNC PyInit_mtd(void)
 {
-    (void) Py_InitModule("mtd", mtd_methods);
+    return PyModule_Create(&mtdmodule);
 }

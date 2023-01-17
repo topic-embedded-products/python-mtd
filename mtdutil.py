@@ -21,7 +21,7 @@ def flash_is_erased(device, size, sector_size = None):
 		fd = device.fileno()
 		t, total_size, sector_size = mtd.get_info(fd)
 		if size > total_size:
-			raise Exception, "File is too large: %d > %d" % (size, total_size)
+			raise Exception("File is too large: %d > %d" % (size, total_size))
 	ones = '\xff' * sector_size
 	start = 0;
 	while start < size:
@@ -37,7 +37,7 @@ def flash_erase(device, size, sector_size = None, verbose = True, start = 0):
 	if sector_size is None:
 		t, total_size, sector_size = mtd.get_info(fd)
 		if size > total_size:
-			raise Exception, "File is too large: %d > %d" % (size, total_size)
+			raise Exception("File is too large: %d > %d" % (size, total_size))
 	while start < size:
 		if verbose:
 			sys.stderr.write("erase %d/%d\r" % (start, size))
@@ -55,9 +55,9 @@ def flash_update(mtddev, filename, verbose = True, offset = 0):
 		with open(mtddev, 'r+b', 0) as device:
 			t, total_size, sector_size = mtd.get_info(device.fileno())
 			if total_size - offset < file_size:
-				raise Exception, "%s (%d) won't fit in %s (%d)" % (filename, file_size, mtddev, total_size - offset)
-                        if offset:
-                            device.seek(offset)
+				raise Exception("%s (%d) won't fit in %s (%d)" % (filename, file_size, mtddev, total_size - offset))
+			if offset:
+				device.seek(offset)
 			if flash_compare(device, fd, sector_size):
 				if verbose:
 					sys.stderr.write("Skip %s: %s, contents are equal\n" % (mtddev, filename))
@@ -82,7 +82,7 @@ def flash_update(mtddev, filename, verbose = True, offset = 0):
 			fd.seek(0)
 			device.seek(offset)
 			if not flash_compare(device, fd, sector_size):
-				raise Exception, "Flash verification failed"
+				raise Exception("Flash verification failed")
 			if verbose:
 				sys.stderr.write("%s: %s, %d/%d bytes\n" % (mtddev, filename, file_size, total_size))
 	return file_size
