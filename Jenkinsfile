@@ -13,7 +13,7 @@ node('linux') {
         // This command checks out the correct branch and revision
         checkout scm
         echo('Building...')
-        sh('python setup.py build')
+        sh('python3 setup.py build')
     }
 
     stage('Test') {
